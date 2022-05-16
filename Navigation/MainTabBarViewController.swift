@@ -11,17 +11,22 @@ class MainTabBarViewController: UITabBarController {
 
     let feedVC = FeedViewController()
     let profileVC = ProfileViewController()
-    let postVC = PostViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupControllers()
+        view.backgroundColor = .systemGray6
+//        UINavigationBar.appearance().backgroundColor = UIColor.white
+//        // UIBarButtonItem.appearance().tintColor = UIColor.lightGray - цвет кнопок
+//        UITabBar.appearance().backgroundColor = UIColor.white
 
+        setupControllers()
     }
+    
     private func setupControllers() {
         let firstNavController = UINavigationController(rootViewController: feedVC)
         feedVC.tabBarItem.title = "Feed"
         feedVC.tabBarItem.image = UIImage(systemName: "house.fill")
+        feedVC.navigationItem.title = "Feed"
         
         let secondNavController = UINavigationController(rootViewController: profileVC)
         profileVC.tabBarItem.title = "Profile"
