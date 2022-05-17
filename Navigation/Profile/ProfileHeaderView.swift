@@ -29,8 +29,8 @@ class ProfileHeaderView: UIView {
 
          lazy var profileAvatarImage: UIImageView = {
              let tempImage = UIImage(named: "pic")
-             let profileAvatarImage = UIImageView()
-             profileAvatarImage.translatesAutoresizingMaskIntoConstraints = false
+             let profileAvatarImage = UIImageView(frame: CGRect(x: 16, y: 16, width: 110, height: 110))
+             //profileAvatarImage.translatesAutoresizingMaskIntoConstraints = false
              profileAvatarImage.clipsToBounds = true
              profileAvatarImage.backgroundColor = .systemBackground
              profileAvatarImage.layer.cornerRadius = 55.0
@@ -41,8 +41,8 @@ class ProfileHeaderView: UIView {
          }()
 
          lazy var profileNameLabel: UILabel = {
-             let profileNameLabel = UILabel()
-             profileNameLabel.translatesAutoresizingMaskIntoConstraints = false
+             let profileNameLabel = UILabel(frame: CGRect(x: 142, y: 27, width: 150, height: 20))
+             //profileNameLabel.translatesAutoresizingMaskIntoConstraints = false
              profileNameLabel.text = "Venediktova Kate"
              profileNameLabel.textColor = .black
              profileNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -50,8 +50,8 @@ class ProfileHeaderView: UIView {
          }()
 
          lazy var profileStatusTextField: UITextField = {
-             let profileStatusTextField = UITextField()
-             profileStatusTextField.translatesAutoresizingMaskIntoConstraints = false
+             let profileStatusTextField = UITextField(frame: CGRect(x: 142, y: 78, width: 200, height: 16))
+             //profileStatusTextField.translatesAutoresizingMaskIntoConstraints = false
              profileStatusTextField.text = "Waiting for something..."
              profileStatusTextField.textColor = .gray
              profileStatusTextField.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -60,8 +60,8 @@ class ProfileHeaderView: UIView {
          }()
 
          lazy var showStatusButton: UIButton = {
-             let showStatusButton = UIButton()
-             showStatusButton.translatesAutoresizingMaskIntoConstraints = false
+             let showStatusButton = UIButton(frame: CGRect(x: 16, y: 150, width: UIScreen.main.bounds.width - 32, height: 50))
+             //showStatusButton.translatesAutoresizingMaskIntoConstraints = false
              showStatusButton.backgroundColor = .systemBlue
              showStatusButton.setTitle("Set status", for: .normal)
              showStatusButton.setTitleColor(UIColor.white, for: .normal)
@@ -76,14 +76,13 @@ class ProfileHeaderView: UIView {
 
          @objc private func buttonPressed() {
              profileStatusTextField.text = statusText
-//             newStatusTextField.text = "Enter text here ..."
              self.endEditing(true)
              print(statusText)
          }
     
     lazy var newStatusTextField: UITextField = {
-             let newStatusTextField = UITextField()
-             newStatusTextField.translatesAutoresizingMaskIntoConstraints = false
+             let newStatusTextField = UITextField(frame: CGRect(x: 142, y: 100, width: UIScreen.main.bounds.width - 158, height: 40))
+             //newStatusTextField.translatesAutoresizingMaskIntoConstraints = false
              newStatusTextField.indent(size: 10)
              newStatusTextField.text = "Enter text here ..."
              newStatusTextField.textColor = .black
@@ -100,42 +99,6 @@ class ProfileHeaderView: UIView {
             statusText = newStatusTextField.text!
             print(newStatusTextField)
         }
-    
-         private func setupLayout(){
-             NSLayoutConstraint.activate([
-                 // Отступ слева - 16pt от левой границы safeArea
-                 profileAvatarImage.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
-                 // Отступ сверху - 16pt от верхней границы safeArea
-                 profileAvatarImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16.0),
-                 // Размер изображения по вертикали - 110pt
-                 profileAvatarImage.heightAnchor.constraint(equalToConstant: 110.0),
-                 // Размер изображения по горизонтали - 110pt
-                 profileAvatarImage.widthAnchor.constraint(equalToConstant: 110.0),
-
-                 // Отступ слева - 16pt от правой границы изображения
-                 profileNameLabel.leadingAnchor.constraint(equalTo: profileAvatarImage.trailingAnchor, constant: 16.0),
-                 profileNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27.0),
-                 profileNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
-
-                profileStatusTextField.leadingAnchor.constraint(equalTo: profileAvatarImage.trailingAnchor, constant: 16.0),
-                 // Текст статуса / Нижняя граница - 34pt от верха button Set status
-                profileStatusTextField.bottomAnchor.constraint(equalTo: showStatusButton.topAnchor, constant: -68.0),
-                profileStatusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
-                 
-                 newStatusTextField.leadingAnchor.constraint(equalTo: profileAvatarImage.trailingAnchor, constant: 16.0),
-                 newStatusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
-                 newStatusTextField.topAnchor.constraint(equalTo: profileAvatarImage.bottomAnchor, constant: -16.0),
-                 newStatusTextField.heightAnchor.constraint(equalToConstant: 40),
-
-                 showStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
-                 // Высота кнопки от вехра 16pt
-                 showStatusButton.topAnchor.constraint(equalTo: profileAvatarImage.bottomAnchor, constant: 32.0),
-                 // Ширина кнопки
-                 showStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
-                 // Высота кнопки - 50pt
-                 showStatusButton.heightAnchor.constraint(equalToConstant: 50.0)
-             ])
-         }
 
          private func setupView(){
              addSubview(profileAvatarImage)
@@ -143,7 +106,6 @@ class ProfileHeaderView: UIView {
              addSubview(profileStatusTextField)
              addSubview(showStatusButton)
              addSubview(newStatusTextField)
-             setupLayout()
          }
 
 }
