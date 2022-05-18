@@ -113,10 +113,11 @@ class ProfileHeaderView: UIView {
             // Размер изображения по горизонтали - 110pt
             avatarImageView.widthAnchor.constraint(equalToConstant: 110.0),
             // Отступ слева - 16pt от правой границы изображения
+            
             fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16.0),
             fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27.0),
             fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
-
+            
             statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16.0),
             // Текст статуса / Нижняя граница - 34pt от верха button Set status
             statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -68.0),
@@ -126,24 +127,14 @@ class ProfileHeaderView: UIView {
             statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
             statusTextField.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -16.0),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
-
+            
             setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
             // Высота кнопки от вехра 16pt
             setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 32.0),
             // Ширина кнопки
             setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
             // Высота кнопки - 50pt
-            setStatusButton.heightAnchor.constraint(equalToConstant: 50.0)
-                 ])
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50.0)])
              }
-
-         private func setupView(){
-             addSubview(avatarImageView)
-             addSubview(fullNameLabel)
-             addSubview(statusLabel)
-             addSubview(setStatusButton)
-             addSubview(statusTextField)
-             setupLayout()
-         }
 
 }
