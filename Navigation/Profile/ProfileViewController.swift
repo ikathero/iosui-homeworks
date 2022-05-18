@@ -22,15 +22,38 @@ class ProfileViewController: UIViewController {
              return profileHV
          }()
     
+    private lazy var newButton: UIButton = {
+             let newButton = UIButton()
+             newButton.translatesAutoresizingMaskIntoConstraints = false
+             newButton.backgroundColor = .systemOrange
+             newButton.setTitle("Tap me", for: .normal)
+             newButton.setTitleColor(UIColor.white, for: .normal)
+             newButton.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
+             return newButton
+         }()
+
+    @objc private func tapAction() {
+             print("The user pressed the button 'Tap me'")
+    }
+    
     private func setupLayout() {
         view.addSubview(profileHV)
+        view.addSubview(newButton)
         
         NSLayoutConstraint.activate([
             // рамка
             profileHV.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             profileHV.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             profileHV.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileHV.heightAnchor.constraint(equalToConstant: 220)])
+            profileHV.heightAnchor.constraint(equalToConstant: 220)
+        ])
+        
+        NSLayoutConstraint.activate([
+            // кнопка
+            newButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            newButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
-
+    
 }
