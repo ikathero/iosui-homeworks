@@ -45,10 +45,7 @@ class ProfileViewController: UIViewController {
             profileHV.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             profileHV.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             profileHV.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileHV.heightAnchor.constraint(equalToConstant: 220)
-        ])
-        
-        NSLayoutConstraint.activate([
+            profileHV.heightAnchor.constraint(equalToConstant: 220),
             // кнопка
             newButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             newButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),

@@ -84,7 +84,7 @@ class ProfileHeaderView: UIView {
         let statusTextField = UITextField()
             statusTextField.translatesAutoresizingMaskIntoConstraints = false
             statusTextField.indent(size: 10)
-            statusTextField.text = "Enter text here ..."
+            statusTextField.text = ""
             statusTextField.textColor = .black
             statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
             statusTextField.backgroundColor = .white
@@ -104,6 +104,7 @@ class ProfileHeaderView: UIView {
         [avatarImageView, fullNameLabel, statusLabel, setStatusButton, statusTextField].forEach { addSubview($0) }
         
         NSLayoutConstraint.activate([
+            // Avatar Image
             // Отступ слева - 16pt от левой границы safeArea
             avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
             // Отступ сверху - 16pt от верхней границы safeArea
@@ -111,30 +112,22 @@ class ProfileHeaderView: UIView {
             // Размер изображения по вертикали - 110pt
             avatarImageView.heightAnchor.constraint(equalToConstant: 110.0),
             // Размер изображения по горизонтали - 110pt
-            avatarImageView.widthAnchor.constraint(equalToConstant: 110.0)
-        ])
-        
-        NSLayoutConstraint.activate([
+            avatarImageView.widthAnchor.constraint(equalToConstant: 110.0),
+            // Full Name
             fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16.0),
             fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27.0),
-            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0)
-        ])
-        
-        NSLayoutConstraint.activate([
+            fullNameLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
+            // Status Label
             statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16.0),
             // Текст статуса / Нижняя граница - 34pt от верха button Set status
             statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -68.0),
-            statusLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0)
-        ])
-        
-        NSLayoutConstraint.activate([
+            statusLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
+            // Status Text
             statusTextField.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 16.0),
             statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
             statusTextField.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: -16.0),
-            statusTextField.heightAnchor.constraint(equalToConstant: 40)
-        ])
-        
-        NSLayoutConstraint.activate([
+            statusTextField.heightAnchor.constraint(equalToConstant: 40),
+            // Set status
             setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16.0),
             setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 32.0),
             setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16.0),
