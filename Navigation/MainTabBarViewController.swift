@@ -14,10 +14,10 @@ class MainTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemGray6
-//        UINavigationBar.appearance().backgroundColor = UIColor.white
-//        // UIBarButtonItem.appearance().tintColor = UIColor.lightGray - цвет кнопок
-//        UITabBar.appearance().backgroundColor = UIColor.white
+        //view.backgroundColor = .purple
+        //UINavigationBar.appearance().backgroundColor = UIColor.white
+        //UIBarButtonItem.appearance().tintColor = .green //- цвет кнопок
+        //UITabBar.appearance().backgroundColor = UIColor.white
 
         setupControllers()
     }
