@@ -9,7 +9,7 @@ import UIKit
 
 class PostViewController: UIViewController {
 
-    var post = Post(title: "Post")
+    var post = PostTitle(title: "Post")
     
     override func viewDidLoad() {
         super.viewDidLoad()
