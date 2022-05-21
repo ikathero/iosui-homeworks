@@ -9,29 +9,29 @@
 /* Begin PBXBuildFile section */
 		8C6CDCE2282AE562004A790E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CDCE1282AE562004A790E /* AppDelegate.swift */; };
 		8C6CDCE4282AE562004A790E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CDCE3282AE562004A790E /* SceneDelegate.swift */; };
-		8C6CDCE6282AE562004A790E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CDCE5282AE562004A790E /* ViewController.swift */; };
 		8C6CDCEB282AE563004A790E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C6CDCEA282AE563004A790E /* Assets.xcassets */; };
 		8C6CDCEE282AE563004A790E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C6CDCEC282AE563004A790E /* LaunchScreen.storyboard */; };
 		8C6CDCF6282AE89D004A790E /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CDCF5282AE89D004A790E /* MainTabBarViewController.swift */; };
 		8C6CDCF8282AE8C5004A790E /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CDCF7282AE8C5004A790E /* FeedViewController.swift */; };
-		8C6CDCFA282AE8D3004A790E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CDCF9282AE8D3004A790E /* ProfileViewController.swift */; };
 		8C6CDCFC282AE8FE004A790E /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CDCFB282AE8FE004A790E /* PostViewController.swift */; };
 		8C6CDCFE282AE908004A790E /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6CDCFD282AE908004A790E /* InfoViewController.swift */; };
+		8C7DC1B6283246D5003B2ACA /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DC1B5283246D5003B2ACA /* ProfileHeaderView.swift */; };
+		8C7DC1B82832471C003B2ACA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DC1B72832471C003B2ACA /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8C6CDCDE282AE562004A790E /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C6CDCE1282AE562004A790E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C6CDCE3282AE562004A790E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8C6CDCE5282AE562004A790E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8C6CDCEA282AE563004A790E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C6CDCED282AE563004A790E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C6CDCEF282AE563004A790E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C6CDCF5282AE89D004A790E /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		8C6CDCF7282AE8C5004A790E /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
-		8C6CDCF9282AE8D3004A790E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8C6CDCFB282AE8FE004A790E /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		8C6CDCFD282AE908004A790E /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		8C7DC1B5283246D5003B2ACA /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		8C7DC1B72832471C003B2ACA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,19 +64,27 @@
 		8C6CDCE0282AE562004A790E /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				8C7DC1B32832460B003B2ACA /* Profile */,
 				8C6CDCE1282AE562004A790E /* AppDelegate.swift */,
 				8C6CDCE3282AE562004A790E /* SceneDelegate.swift */,
 				8C6CDCF5282AE89D004A790E /* MainTabBarViewController.swift */,
 				8C6CDCF7282AE8C5004A790E /* FeedViewController.swift */,
 				8C6CDCFB282AE8FE004A790E /* PostViewController.swift */,
 				8C6CDCFD282AE908004A790E /* InfoViewController.swift */,
-				8C6CDCF9282AE8D3004A790E /* ProfileViewController.swift */,
-				8C6CDCE5282AE562004A790E /* ViewController.swift */,
 				8C6CDCEA282AE563004A790E /* Assets.xcassets */,
 				8C6CDCEC282AE563004A790E /* LaunchScreen.storyboard */,
 				8C6CDCEF282AE563004A790E /* Info.plist */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		8C7DC1B32832460B003B2ACA /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8C7DC1B5283246D5003B2ACA /* ProfileHeaderView.swift */,
+				8C7DC1B72832471C003B2ACA /* ProfileViewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,10 +157,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C6CDCFA282AE8D3004A790E /* ProfileViewController.swift in Sources */,
-				8C6CDCE6282AE562004A790E /* ViewController.swift in Sources */,
+				8C7DC1B82832471C003B2ACA /* ProfileViewController.swift in Sources */,
 				8C6CDCFC282AE8FE004A790E /* PostViewController.swift in Sources */,
 				8C6CDCF6282AE89D004A790E /* MainTabBarViewController.swift in Sources */,
+				8C7DC1B6283246D5003B2ACA /* ProfileHeaderView.swift in Sources */,
 				8C6CDCF8282AE8C5004A790E /* FeedViewController.swift in Sources */,
 				8C6CDCE2282AE562004A790E /* AppDelegate.swift in Sources */,
 				8C6CDCFE282AE908004A790E /* InfoViewController.swift in Sources */,

@@ -18,7 +18,7 @@ class FeedViewController: UIViewController {
     private func makeButton() {
         let buttonPost = UIButton(frame: CGRect(x: 0, y: 0, width: 300, height: 50))
         buttonPost.center = view.center
-        buttonPost.setTitle("Post", for: .normal)
+        buttonPost.setTitle("My post", for: .normal)
         buttonPost.backgroundColor = .systemBlue
         buttonPost.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
         buttonPost.layer.cornerRadius = 12
