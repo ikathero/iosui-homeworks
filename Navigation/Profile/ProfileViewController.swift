@@ -9,6 +9,17 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    private let post: [Post] = Post.makePost()
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .grouped)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemGray6 // окрашивает общий фон
@@ -17,40 +28,59 @@ class ProfileViewController: UIViewController {
 
     private let profileHV: ProfileHeaderView = {
         let profileHV = ProfileHeaderView()
-        profileHV.backgroundColor = .lightGray // окрашивает рамку
+        profileHV.backgroundColor = .systemGray6
         profileHV.translatesAutoresizingMaskIntoConstraints = false
-             return profileHV
-         }()
-    
-    private lazy var newButton: UIButton = {
-             let newButton = UIButton()
-             newButton.translatesAutoresizingMaskIntoConstraints = false
-             newButton.backgroundColor = .systemOrange
-             newButton.setTitle("Tap me", for: .normal)
-             newButton.setTitleColor(UIColor.white, for: .normal)
-             newButton.addTarget(self, action: #selector(tapAction), for: .touchUpInside)
-             return newButton
-         }()
+        return profileHV
+    }()
 
-    @objc private func tapAction() {
-             print("The user pressed the button 'Tap me'")
-    }
-    
     private func setupLayout() {
-        view.addSubview(profileHV)
-        view.addSubview(newButton)
-        
+
         NSLayoutConstraint.activate([
-            // рамка
-            profileHV.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            profileHV.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            profileHV.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            profileHV.heightAnchor.constraint(equalToConstant: 220),
-            // кнопка
-            newButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            newButton.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
+}
+
+// MARK: - UITableViewDelegate
+
+ extension ProfileViewController: UITableViewDelegate {
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+         UITableView.automaticDimension
+     }
+
+     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+         let profileHeader = ProfileHeaderView()
+         return profileHeader
+     }
+
+     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+         return 220
+     }
+ }
+
+// MARK: - UITableViewDataSource
+
+ extension ProfileViewController: UITableViewDataSource {
+
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return post.count
+     }
+
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
+         cell.setupCell(post[indexPath.row])
+         return cell
+     }
+ }
+
+// MARK: - UIView
+
+extension UIView {
+    static var identifier: String {
+        return String(describing: self)
+    }
 }

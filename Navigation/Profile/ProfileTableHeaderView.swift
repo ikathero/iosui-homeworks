@@ -1,18 +1,11 @@
 //
-//  ProfileHeaderView.swift
+//  ProfileTableHeaderView.swift
 //  Navigation
 //
-//  Created by Venediktova Kate on 16.05.2022.
+//  Created by Venediktova Kate on 22.05.2022.
 //
 
 import UIKit
-
-extension UITextField {
-     func indent(size:CGFloat) {
-         self.leftView = UIView(frame: CGRect(x: self.frame.minX, y: self.frame.minY, width: size, height: self.frame.height))
-         self.leftViewMode = .always
-     }
- }
 
 class ProfileHeaderView: UIView {
     
@@ -134,4 +127,14 @@ class ProfileHeaderView: UIView {
         ])
     }
 
+}
+
+
+// MARK: UITextField
+
+extension UITextField {
+     func indent(size:CGFloat) {
+         self.leftView = UIView(frame: CGRect(x: self.frame.minX, y: self.frame.minY, width: size, height: self.frame.height))
+         self.leftViewMode = .always
+     }
 }
