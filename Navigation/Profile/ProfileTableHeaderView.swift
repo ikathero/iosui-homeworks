@@ -25,6 +25,7 @@ class ProfileHeaderView: UIView {
              let avatarImageView = UIImageView()
              avatarImageView.translatesAutoresizingMaskIntoConstraints = false
              avatarImageView.clipsToBounds = true
+             avatarImageView.contentMode = .scaleAspectFill
              avatarImageView.backgroundColor = .systemBackground
              avatarImageView.layer.cornerRadius = 55.0
              avatarImageView.layer.borderWidth = 3.0
@@ -54,8 +55,9 @@ class ProfileHeaderView: UIView {
 
          lazy var setStatusButton: UIButton = {
              let setStatusButton = UIButton()
+             let colorButton = UIColor(patternImage: UIImage(named: "blue_pixel.png")!)
              setStatusButton.translatesAutoresizingMaskIntoConstraints = false
-             setStatusButton.backgroundColor = .systemBlue
+             setStatusButton.backgroundColor = colorButton
              setStatusButton.setTitle("Set status", for: .normal)
              setStatusButton.setTitleColor(UIColor.white, for: .normal)
              setStatusButton.layer.cornerRadius = 12.0
