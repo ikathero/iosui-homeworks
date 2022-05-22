@@ -1,5 +1,5 @@
 //
-//  PhotosViewController.swift
+//  PhotosCollectionViewCell.swift
 //  Navigation
 //
 //  Created by Venediktova Kate on 22.05.2022.
@@ -7,47 +7,44 @@
 
 import UIKit
 
-class PhotosViewController: UIViewController {
+let photos: [Photos] = Photos.makeMockModel()
+
+class PhotosCollectionViewCell: UICollectionViewCell {
     
-    private let photos: [Photos] = Photos.makeMockModel()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.backgroundColor = .systemGray6
-        self.title = "Photo Gallery"
-        self.navigationController?.navigationBar.isHidden = false
+    private var photoImageView: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        view.contentMode = .scaleAspectFill
+        view.layer.cornerRadius = 0
+        view.clipsToBounds = true
+        return view
+    }()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupLayout()
     }
-    private lazy var layout: UICollectionViewFlowLayout = {
-        $0.scrollDirection = .vertical
-        $0.minimumLineSpacing = 8
-        $0.minimumInteritemSpacing = 8
-        return $0
-    }(UICollectionViewFlowLayout())
-    
-    private lazy var collectionView: UICollectionView = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
-        $0.backgroundColor = .white
-        $0.dataSource = self
-        $0.delegate = self
-        $0.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier)
-        return $0
-    }(UICollectionView(frame: .zero, collectionViewLayout: self.layout))
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
+    
+    func setupCell(_ photo: Photos) {
+        photoImageView.image = UIImage(named: photo.image)
+    }
+
     private func setupLayout() {
-        view.addSubview(collectionView)
+        contentView.addSubview(photoImageView)
 
         NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            photoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            photoImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            photoImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            photoImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
         ])
     }
+
 }
 
 // MARK: - UICollectionViewDataSource
@@ -68,13 +65,13 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
 }
 
-// MARK: - UICollectionViewDelegate
+// MARK: - UICollectionViewDelegateFlowLayout
 
-extension PhotosViewController: UICollectionViewDelegate {
+extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     private var sideInset: CGFloat { return 8 }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let width = (collectionView.bounds.width - sideInset * 4) / 3
+            let width = (collectionView.bounds.width - sideInset * 4) / 3 // количество ячеек в строке
             return CGSize(width: width, height: width)
     }
     

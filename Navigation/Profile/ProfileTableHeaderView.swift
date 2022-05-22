@@ -21,8 +21,8 @@ class ProfileHeaderView: UIView {
          }
 
          lazy var avatarImageView: UIImageView = {
-             let avatar = UIImage(named: "pic")
              let avatarImageView = UIImageView()
+             avatarImageView.image = UIImage(named: "pic")
              avatarImageView.translatesAutoresizingMaskIntoConstraints = false
              avatarImageView.clipsToBounds = true
              avatarImageView.contentMode = .scaleAspectFill
@@ -30,7 +30,6 @@ class ProfileHeaderView: UIView {
              avatarImageView.layer.cornerRadius = 55.0
              avatarImageView.layer.borderWidth = 3.0
              avatarImageView.layer.borderColor = UIColor.white.cgColor
-             avatarImageView.image = avatar
              return avatarImageView
          }()
 
@@ -130,7 +129,6 @@ class ProfileHeaderView: UIView {
     }
 
 }
-
 
 // MARK: UITextField
 

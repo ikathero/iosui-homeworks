@@ -117,33 +117,33 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
-		8C79836A28398EC100604FFA /* Profile post */ = {
+		8C79836A28398EC100604FFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				8C79836B28398EF200604FFA /* PostModel.swift */,
-				8C79836D28399A2800604FFA /* PostTableViewCell.swift */,
-			);
-			path = "Profile post";
-			sourceTree = "<group>";
-		};
-		8C798371283AB27700604FFA /* Profile photos */ = {
-			isa = PBXGroup;
-			children = (
-				8C79836F283AA32000604FFA /* PhotosTableViewCell.swift */,
-				8C798376283ABB7C00604FFA /* PhotosCollectionViewCell.swift */,
-				8C798372283AB4D400604FFA /* PhotosViewController.swift */,
 				8C798374283AB5D900604FFA /* PhotosModel.swift */,
 			);
-			path = "Profile photos";
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8C798371283AB27700604FFA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8C79836D28399A2800604FFA /* PostTableViewCell.swift */,
+				8C79836F283AA32000604FFA /* PhotosTableViewCell.swift */,
+				8C798376283ABB7C00604FFA /* PhotosCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		8C7DC1B32832460B003B2ACA /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				8C79836828398DA400604FFA /* ProfileTableHeaderView.swift */,
+				8C798372283AB4D400604FFA /* PhotosViewController.swift */,
 				8C7DC1B72832471C003B2ACA /* ProfileViewController.swift */,
-				8C798371283AB27700604FFA /* Profile photos */,
-				8C79836A28398EC100604FFA /* Profile post */,
+				8C798371283AB27700604FFA /* Cell */,
+				8C79836A28398EC100604FFA /* Model */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
