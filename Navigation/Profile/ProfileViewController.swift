@@ -34,7 +34,6 @@ class ProfileViewController: UIViewController {
     }()
 
     private func setupLayout() {
-        view.addSubview(tableView)
 
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
