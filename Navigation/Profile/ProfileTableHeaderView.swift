@@ -47,7 +47,10 @@ class ProfileHeaderView: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        button.tintColor = .systemGray6
         button.alpha = 0
+        button.imageView?.layer.transform = CATransform3DMakeScale(1.5, 1.5, 1.5)
+        button.addTarget(self, action: #selector(closeImageAction), for: .touchUpInside)
         return button
     }()
     
@@ -57,8 +60,11 @@ class ProfileHeaderView: UIView {
     }
     
     @objc private func tapImageAction() {
+        imagePosition = avatarImageView.layer.position
+        imageBounds = avatarImageView.layer.bounds
+    
         let centerScreen = UIScreen.main.bounds.height / 2 - 55 // 55 - половина высоты аватара
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseIn) { [self] in
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseInOut) { [self] in
             self.blackoutView.alpha = 0.80
             self.avatarImageView.center.y = centerScreen
             self.avatarImageView.center.x = blackoutView.center.x
@@ -68,9 +74,25 @@ class ProfileHeaderView: UIView {
             } completion: { _ in
                 UIView.animate(withDuration: 0.3, delay: 0.0) {
                     self.layoutIfNeeded()
+                    self.closeImageButton.alpha = 1
                 }
             }
     }
+    
+    private lazy var imagePosition = avatarImageView.layer.position
+    private lazy var imageBounds = avatarImageView.layer.bounds
+    
+    @objc private func closeImageAction() {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: .curveEaseInOut) {
+            self.blackoutView.alpha = 0.0
+            self.avatarImageView.layer.position = self.imagePosition
+            self.avatarImageView.layer.bounds = self.imageBounds
+            self.avatarImageView.layer.cornerRadius = self.avatarImageView.bounds.width / 2
+            self.closeImageButton.alpha = 0
+            self.layoutIfNeeded()
+        }
+    }
+    
     lazy var fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -171,8 +193,8 @@ class ProfileHeaderView: UIView {
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
             
             // CloseImage
-            
-            closeImageButton.bottomAnchor.constraint(equalTo: avatarImageView.topAnchor, constant: -16)
+            closeImageButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            closeImageButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8)
         ])
     }
 
