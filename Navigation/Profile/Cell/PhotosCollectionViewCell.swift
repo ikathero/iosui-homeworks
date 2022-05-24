@@ -58,6 +58,7 @@ extension PhotosViewController: UICollectionViewDataSource {
         return photos.count
     }
     
+    // Отображение конкретной ячейки
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier, for: indexPath) as! PhotosCollectionViewCell
         cell.setupCell(photos[indexPath.row])
@@ -71,9 +72,11 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     private var sideInset: CGFloat { return 8 }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            let width = (collectionView.bounds.width - sideInset * 4) / 3 // количество ячеек в строке
+            let width = (collectionView.bounds.width - sideInset * 4) / 3 // количество отступов (4) и ячеек (3) в строке
             return CGSize(width: width, height: width)
     }
+    
+    // Расстояние между ячейками, использовать все: minimumLineSpacingForSectionAt, insetForSectionAt, minimumInteritemSpacingForSectionAt, minimumInteritemSpacingForSectionAt
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
              sideInset
@@ -87,7 +90,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
              sideInset
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, minimumInteritemSpacingForSectionAt indexPath: IndexPath) {
         print(indexPath.section, indexPath.item)
     }
 }
