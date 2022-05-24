@@ -19,6 +19,10 @@
 		8C79836928398DA400604FFA /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79836828398DA400604FFA /* ProfileTableHeaderView.swift */; };
 		8C79836C28398EF200604FFA /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79836B28398EF200604FFA /* PostModel.swift */; };
 		8C79836E28399A2800604FFA /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79836D28399A2800604FFA /* PostTableViewCell.swift */; };
+		8C798370283AA32000604FFA /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79836F283AA32000604FFA /* PhotosTableViewCell.swift */; };
+		8C798373283AB4D400604FFA /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C798372283AB4D400604FFA /* PhotosViewController.swift */; };
+		8C798375283AB5D900604FFA /* PhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C798374283AB5D900604FFA /* PhotosModel.swift */; };
+		8C798377283ABB7C00604FFA /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C798376283ABB7C00604FFA /* PhotosCollectionViewCell.swift */; };
 		8C7DC1B82832471C003B2ACA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DC1B72832471C003B2ACA /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +41,10 @@
 		8C79836828398DA400604FFA /* ProfileTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderView.swift; sourceTree = "<group>"; };
 		8C79836B28398EF200604FFA /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		8C79836D28399A2800604FFA /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		8C79836F283AA32000604FFA /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		8C798372283AB4D400604FFA /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		8C798374283AB5D900604FFA /* PhotosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosModel.swift; sourceTree = "<group>"; };
+		8C798376283ABB7C00604FFA /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		8C7DC1B72832471C003B2ACA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,6 +106,7 @@
 			children = (
 				8C6CDCF5282AE89D004A790E /* MainTabBarViewController.swift */,
 				8C6CDCFD282AE908004A790E /* InfoViewController.swift */,
+				8C798362283952EC00604FFA /* LogInViewController.swift */,
 				8C7DC1B32832460B003B2ACA /* Profile */,
 				8C51FD512835AE0E00A34448 /* Post */,
 				8C51FD502835ADED00A34448 /* Feed */,
@@ -108,22 +117,33 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
-		8C79836A28398EC100604FFA /* Profile post */ = {
+		8C79836A28398EC100604FFA /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				8C79836B28398EF200604FFA /* PostModel.swift */,
-				8C79836D28399A2800604FFA /* PostTableViewCell.swift */,
+				8C798374283AB5D900604FFA /* PhotosModel.swift */,
 			);
-			path = "Profile post";
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8C798371283AB27700604FFA /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8C79836D28399A2800604FFA /* PostTableViewCell.swift */,
+				8C79836F283AA32000604FFA /* PhotosTableViewCell.swift */,
+				8C798376283ABB7C00604FFA /* PhotosCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		8C7DC1B32832460B003B2ACA /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				8C79836A28398EC100604FFA /* Profile post */,
 				8C79836828398DA400604FFA /* ProfileTableHeaderView.swift */,
-				8C798362283952EC00604FFA /* LogInViewController.swift */,
+				8C798372283AB4D400604FFA /* PhotosViewController.swift */,
 				8C7DC1B72832471C003B2ACA /* ProfileViewController.swift */,
+				8C798371283AB27700604FFA /* Cell */,
+				8C79836A28398EC100604FFA /* Model */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -206,7 +226,11 @@
 				8C6CDCF8282AE8C5004A790E /* FeedViewController.swift in Sources */,
 				8C6CDCE2282AE562004A790E /* AppDelegate.swift in Sources */,
 				8C6CDCFE282AE908004A790E /* InfoViewController.swift in Sources */,
+				8C798370283AA32000604FFA /* PhotosTableViewCell.swift in Sources */,
 				8C798363283952EC00604FFA /* LogInViewController.swift in Sources */,
+				8C798375283AB5D900604FFA /* PhotosModel.swift in Sources */,
+				8C798373283AB4D400604FFA /* PhotosViewController.swift in Sources */,
+				8C798377283ABB7C00604FFA /* PhotosCollectionViewCell.swift in Sources */,
 				8C6CDCE4282AE562004A790E /* SceneDelegate.swift in Sources */,
 				8C79836E28399A2800604FFA /* PostTableViewCell.swift in Sources */,
 			);

@@ -21,15 +21,15 @@ class ProfileHeaderView: UIView {
          }
 
          lazy var avatarImageView: UIImageView = {
-             let avatar = UIImage(named: "pic")
              let avatarImageView = UIImageView()
+             avatarImageView.image = UIImage(named: "pic")
              avatarImageView.translatesAutoresizingMaskIntoConstraints = false
              avatarImageView.clipsToBounds = true
+             avatarImageView.contentMode = .scaleAspectFill
              avatarImageView.backgroundColor = .systemBackground
              avatarImageView.layer.cornerRadius = 55.0
              avatarImageView.layer.borderWidth = 3.0
              avatarImageView.layer.borderColor = UIColor.white.cgColor
-             avatarImageView.image = avatar
              return avatarImageView
          }()
 
@@ -54,8 +54,9 @@ class ProfileHeaderView: UIView {
 
          lazy var setStatusButton: UIButton = {
              let setStatusButton = UIButton()
+             let colorButton = UIColor(patternImage: UIImage(named: "blue_pixel.png")!)
              setStatusButton.translatesAutoresizingMaskIntoConstraints = false
-             setStatusButton.backgroundColor = .systemBlue
+             setStatusButton.backgroundColor = colorButton
              setStatusButton.setTitle("Set status", for: .normal)
              setStatusButton.setTitleColor(UIColor.white, for: .normal)
              setStatusButton.layer.cornerRadius = 12.0
@@ -128,7 +129,6 @@ class ProfileHeaderView: UIView {
     }
 
 }
-
 
 // MARK: UITextField
 
