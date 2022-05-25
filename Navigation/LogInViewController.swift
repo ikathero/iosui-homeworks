@@ -4,6 +4,28 @@
 //
 //  Created by Venediktova Kate on 21.05.2022.
 //
+extension String {
+    func isValidPassword(_ regEx: String) -> Bool {
+        return self.range(of: regEx, options: .regularExpression, range: nil, locale: nil) != nil
+    }
+    
+    func isValidPhoneNumber() -> Bool {
+        let regEx = "^\\+(?:[0-9]?){6,14}[0-9]$"
+        let phoneCheck = NSPredicate(format: "SELF MATCHES[c] %@", regEx)
+        return phoneCheck.evaluate(with: self)
+    }
+    
+//    func isValidEmail() -> Bool {
+//        let emailRegEx = "(?:[a-zA-Z0-9!#$%\\&‘*+/=?\\^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%\\&'*+/=?\\^_`{|}"
+//        + "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+//        + "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+//        + "z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+//        + "]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+//        + "9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+//        + "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+//        return
+//    }
+}
 
 import UIKit
 
@@ -63,6 +85,20 @@ class LogInViewController: UIViewController {
         return userLoginTextField
     }()
 
+    private let minLenght = 8
+    private lazy var passwordRegEx = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[$@$!%*?&#])[A-Za-z\\d$@$!%*?&#]{\(minLenght),14}$"
+    
+    private lazy var emailRegEx = "(?:[a-zA-Z0-9!#$%\\&‘*+/=?\\^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%\\&'*+/=?\\^_`{|}"
+            + "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+            + "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+            + "z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+            + "]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+            + "9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+            + "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+    
+    private let password = "Diploma22!"
+    private let email = "ikathero@gmail.com"
+    
     private lazy var userPasswordTextField: UITextField = {
         let userPasswordTextField = UITextField()
         userPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +110,13 @@ class LogInViewController: UIViewController {
         userPasswordTextField.backgroundColor = .systemGray6
         userPasswordTextField.delegate = self
         return userPasswordTextField
+    }()
+    
+    private lazy var messageLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        return label
     }()
         
     private lazy var logInButton: UIButton = {
@@ -94,6 +137,7 @@ class LogInViewController: UIViewController {
     }()
 
     @objc private func logInButtonAction() {
+        checkEnter(accept: )
         let profileVC = ProfileViewController()
         self.navigationController?.pushViewController(profileVC, animated: false)
     }
@@ -146,7 +190,7 @@ class LogInViewController: UIViewController {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
 
-        [logoImage, stackView, logInButton].forEach { contentView.addSubview($0) }
+        [logoImage, stackView, logInButton, messageLabel].forEach { contentView.addSubview($0) }
         [userLoginTextField, userPasswordTextField].forEach { stackView.addArrangedSubview($0) }
 
         NSLayoutConstraint.activate([
@@ -163,6 +207,10 @@ class LogInViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             stackView.heightAnchor.constraint(equalToConstant: 100),
             
+            // MessageLabel
+            messageLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 2),
+            messageLabel.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
+            
             // LogInText
             userLoginTextField.heightAnchor.constraint(equalToConstant: 50),
             // PasswordText
@@ -174,8 +222,37 @@ class LogInViewController: UIViewController {
             logInButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
                  /// Обязательно закрепить нижний элемент к низу contentView !!!
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
+    }
+    private func checkEnter(accept: Bool) {
+        if accept == true {
+            let profileVC = ProfileViewController()
+            self.navigationController?.pushViewController(profileVC, animated: false)
+        } else {
+            _ = UIAlertController(title: "BooM !!!", message: "Do you wanna to go back?", preferredStyle: .alert)
+        }
+    }
+    private func incorrectFill(){
+        stackView.layer.borderWidth = 1
+        stackView.layer.borderColor = UIColor.systemRed.cgColor
+        messageLabel.textColor = .systemRed
+    }
+    private func checkValidation(passwordCheck: String) {
+        if userPasswordTextField.isEditing {
+            guard passwordCheck.count >= minLenght else { // если меньше 8 символов то
+                messageLabel.textColor = .systemRed
+                messageLabel.text = "Password must be longer than \(minLenght - passwordCheck.count) characters"
+            return
+            }
+            if passwordCheck.isValidPassword(passwordRegEx) { // совпадает
+                messageLabel.textColor = .systemGreen
+                messageLabel.text = ""
+            } else {
+                messageLabel.textColor = .systemRed // не совпадает
+                messageLabel.text = ""
+            }
+        }
     }
 
 }
@@ -184,6 +261,43 @@ class LogInViewController: UIViewController {
 extension LogInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
+        if  userLoginTextField.text == "" {
+            incorrectFill()
+            messageLabel.text = "Email/phone can't be empty"
+        } else if userPasswordTextField.text == "" {
+            incorrectFill()
+            messageLabel.text = "Password can't be empty"
+        } else if userPasswordTextField.text == password && userLoginTextField.text == email {
+            stackView.layer.borderColor = UIColor.systemGreen.cgColor
+            messageLabel.textColor = .systemGreen
+            messageLabel.text = "Success"
+            checkEnter(accept: true)
+                
+        } else if userPasswordTextField.text != password {
+            incorrectFill()
+            messageLabel.text = "Error: Incorrect email, phone or password"
+        }
+//        let isSuccess = (textField.text == password)
+//        messageLabel.textColor = isSuccess ? .systemGreen : .systemRed
+//        messageLabel.text = isSuccess ? "Success" : "Error: Incorrect email, phone or password"
+        userPasswordTextField.resignFirstResponder()
+        //userLoginTextField.resignFirstResponder()
         return true
     }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let text = (textField.text ?? "") + string
+        let res: String
+
+        if range.length == 1 {
+            let end = text.index(text.startIndex, offsetBy: text.count - 1)
+            res = String(text[text.startIndex..<end])
+        } else {
+            res = text
+        }
+        checkValidation(passwordCheck: res)
+        textField.text = res
+        return false
+    }
+    
 }
