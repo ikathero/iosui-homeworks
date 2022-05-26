@@ -129,7 +129,22 @@ class ProfileHeaderView: UIView {
     }()
 
     @objc private func buttonPressed() {
-        statusLabel.text = statusText
+        if statusTextField.text != "" {
+            statusLabel.text = statusText
+            self.statusTextField.layer.borderColor = UIColor.black.cgColor
+            statusTextField.text = ""
+            statusTextField.placeholder = "Enter text here ..."
+        } else {
+            UIView.animate(
+            withDuration: 2.5,
+            delay: 0,
+            usingSpringWithDamping: 0.1,
+            initialSpringVelocity: 0.1,
+            options: .curveEaseInOut) {
+            self.statusTextField.placeholder = "Can't be empty"
+            self.statusTextField.layer.borderColor = UIColor.systemRed.cgColor
+            }
+        }
         self.endEditing(true)
         print(statusText)
     }

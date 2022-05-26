@@ -130,17 +130,17 @@ class LogInViewController: UIViewController {
     
     @objc private func logInButtonAction() {
         let profileVC = ProfileViewController()
-        if logIn == true {
+//        if logIn == true {
         self.navigationController?.pushViewController(profileVC, animated: false)
-        } else { UIView.animate(
-            withDuration: 1.0,
-                delay: 0,
-                usingSpringWithDamping: 0.1,
-                initialSpringVelocity: 0.1,
-                options: .curveEaseInOut) {
-                    self.stackView.layer.borderColor = UIColor.systemRed.cgColor
-                }
-        }
+//        } else { UIView.animate(
+//            withDuration: 1.0,
+//                delay: 0,
+//                usingSpringWithDamping: 0.1,
+//                initialSpringVelocity: 0.1,
+//                options: .curveEaseInOut) {
+//                    self.stackView.layer.borderColor = UIColor.systemRed.cgColor
+//                }
+//        }
     }
     
     // MARK: UIScrollView keyboard
