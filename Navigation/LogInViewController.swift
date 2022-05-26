@@ -14,17 +14,7 @@ extension String {
         let phoneCheck = NSPredicate(format: "SELF MATCHES[c] %@", regEx)
         return phoneCheck.evaluate(with: self)
     }
-    
-//    func isValidEmail() -> Bool {
-//        let emailRegEx = "(?:[a-zA-Z0-9!#$%\\&‘*+/=?\\^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%\\&'*+/=?\\^_`{|}"
-//        + "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
-//        + "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
-//        + "z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
-//        + "]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
-//        + "9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
-//        + "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
-//        return
-//    }
+
 }
 
 import UIKit
@@ -135,11 +125,22 @@ class LogInViewController: UIViewController {
         logInButton.addTarget(self, action: #selector(logInButtonAction), for: .touchUpInside)
         return logInButton
     }()
-
+    
+    lazy var logIn = false
+    
     @objc private func logInButtonAction() {
-        checkEnter(accept: )
         let profileVC = ProfileViewController()
+        if logIn == true {
         self.navigationController?.pushViewController(profileVC, animated: false)
+        } else { UIView.animate(
+            withDuration: 1.0,
+                delay: 0,
+                usingSpringWithDamping: 0.1,
+                initialSpringVelocity: 0.1,
+                options: .curveEaseInOut) {
+                    self.stackView.layer.borderColor = UIColor.systemRed.cgColor
+                }
+        }
     }
     
     // MARK: UIScrollView keyboard
@@ -225,14 +226,7 @@ class LogInViewController: UIViewController {
             logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
-    private func checkEnter(accept: Bool) {
-        if accept == true {
-            let profileVC = ProfileViewController()
-            self.navigationController?.pushViewController(profileVC, animated: false)
-        } else {
-            _ = UIAlertController(title: "BooM !!!", message: "Do you wanna to go back?", preferredStyle: .alert)
-        }
-    }
+    
     private func incorrectFill(){
         stackView.layer.borderWidth = 1
         stackView.layer.borderColor = UIColor.systemRed.cgColor
@@ -270,18 +264,22 @@ extension LogInViewController: UITextFieldDelegate {
         } else if userPasswordTextField.text == password && userLoginTextField.text == email {
             stackView.layer.borderColor = UIColor.systemGreen.cgColor
             messageLabel.textColor = .systemGreen
-            messageLabel.text = "Success"
-            checkEnter(accept: true)
+            logIn = true
                 
-        } else if userPasswordTextField.text != password {
+        } else if userPasswordTextField.text != password || userLoginTextField.text != email {
             incorrectFill()
-            messageLabel.text = "Error: Incorrect email, phone or password"
+            
+            let alert = UIAlertController(title: "Error", message: "Incorrect email, phone or password", preferredStyle: .alert)
+            let tryAction = UIAlertAction(title: "Try again", style: .default) { _ in
+                self.dismiss(animated: true)
+            }
+            alert.addAction(tryAction)
+            present(alert, animated: true)
+            
         }
-//        let isSuccess = (textField.text == password)
-//        messageLabel.textColor = isSuccess ? .systemGreen : .systemRed
-//        messageLabel.text = isSuccess ? "Success" : "Error: Incorrect email, phone or password"
+        
         userPasswordTextField.resignFirstResponder()
-        //userLoginTextField.resignFirstResponder()
+        userLoginTextField.resignFirstResponder()
         return true
     }
     
