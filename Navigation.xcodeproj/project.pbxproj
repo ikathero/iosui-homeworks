@@ -23,6 +23,7 @@
 		8C798373283AB4D400604FFA /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C798372283AB4D400604FFA /* PhotosViewController.swift */; };
 		8C798375283AB5D900604FFA /* PhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C798374283AB5D900604FFA /* PhotosModel.swift */; };
 		8C798377283ABB7C00604FFA /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C798376283ABB7C00604FFA /* PhotosCollectionViewCell.swift */; };
+		8C79837D284178EA00604FFA /* FullPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79837C284178EA00604FFA /* FullPostViewController.swift */; };
 		8C7DC1B82832471C003B2ACA /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7DC1B72832471C003B2ACA /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		8C798372283AB4D400604FFA /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		8C798374283AB5D900604FFA /* PhotosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosModel.swift; sourceTree = "<group>"; };
 		8C798376283ABB7C00604FFA /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		8C79837C284178EA00604FFA /* FullPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPostViewController.swift; sourceTree = "<group>"; };
 		8C7DC1B72832471C003B2ACA /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -142,6 +144,7 @@
 				8C79836828398DA400604FFA /* ProfileTableHeaderView.swift */,
 				8C798372283AB4D400604FFA /* PhotosViewController.swift */,
 				8C7DC1B72832471C003B2ACA /* ProfileViewController.swift */,
+				8C79837C284178EA00604FFA /* FullPostViewController.swift */,
 				8C798371283AB27700604FFA /* Cell */,
 				8C79836A28398EC100604FFA /* Model */,
 			);
@@ -225,6 +228,7 @@
 				8C6CDCF6282AE89D004A790E /* MainTabBarViewController.swift in Sources */,
 				8C6CDCF8282AE8C5004A790E /* FeedViewController.swift in Sources */,
 				8C6CDCE2282AE562004A790E /* AppDelegate.swift in Sources */,
+				8C79837D284178EA00604FFA /* FullPostViewController.swift in Sources */,
 				8C6CDCFE282AE908004A790E /* InfoViewController.swift in Sources */,
 				8C798370283AA32000604FFA /* PhotosTableViewCell.swift in Sources */,
 				8C798363283952EC00604FFA /* LogInViewController.swift in Sources */,
