@@ -9,6 +9,22 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
+    var onLikeTap: ((_ post: Post) -> ())?
+    var onImageViewTap: ((_ post: Post) -> ())?
+    
+    var post: Post?
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupLayout()
+        customizeCell()
+        setupGestures()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private let postView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -41,6 +57,7 @@ class PostTableViewCell: UITableViewCell {
         imageView.backgroundColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -50,9 +67,35 @@ class PostTableViewCell: UITableViewCell {
         label.numberOfLines = 1
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.isUserInteractionEnabled = true
         return label
     }()
-
+    
+    private func setupGestures() {
+        let tapGestureLike = UITapGestureRecognizer(target: self, action: #selector(tapLike))
+        likesLabel.addGestureRecognizer(tapGestureLike)
+        let tapGesturesPost = UITapGestureRecognizer(target: self, action: #selector(tapFullImage))
+        postImageView.addGestureRecognizer(tapGesturesPost)
+    }
+    
+    @objc func tapLike() {
+        if var post = self.post {
+            post.likes = post.likes + 1
+            likesLabel.text = "Likes: \(post.likes)"
+            onLikeTap?(post)
+            return
+        }
+    }
+    
+    @objc func tapFullImage() {
+        if var post = self.post {
+            post.views = post.views + 1
+            viewsLabel.text = "Views: \(post.views)"
+            onImageViewTap?(post)
+            return
+        }
+    }
+    
     private let viewsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -61,16 +104,6 @@ class PostTableViewCell: UITableViewCell {
         return label
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupLayout()
-        customizeCell()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     func setupCell(_ post: Post) {
         authorLabel.text = post.author
         descriptionLabel.text = post.description

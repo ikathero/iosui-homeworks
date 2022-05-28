@@ -4,6 +4,11 @@
 //
 //  Created by Venediktova Kate on 21.05.2022.
 //
+extension String {
+    func isValidPassword(_ regEx: String) -> Bool {
+        return self.range(of: regEx, options: .regularExpression, range: nil, locale: nil) != nil
+    }
+}
 
 import UIKit
 
@@ -63,6 +68,12 @@ class LogInViewController: UIViewController {
         return userLoginTextField
     }()
 
+    private let minLenght = 8
+    private lazy var passwordRegEx = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[$@$!%*?&#])[A-Za-z\\d$@$!%*?&#]{\(minLenght),14}$"
+    
+    private let password = "Diploma22!" // пароль для входа
+    private let email = "ikathero@gmail.com" // почта для входа
+    
     private lazy var userPasswordTextField: UITextField = {
         let userPasswordTextField = UITextField()
         userPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +85,13 @@ class LogInViewController: UIViewController {
         userPasswordTextField.backgroundColor = .systemGray6
         userPasswordTextField.delegate = self
         return userPasswordTextField
+    }()
+    
+    private lazy var messageLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        return label
     }()
         
     private lazy var logInButton: UIButton = {
@@ -92,10 +110,22 @@ class LogInViewController: UIViewController {
         logInButton.addTarget(self, action: #selector(logInButtonAction), for: .touchUpInside)
         return logInButton
     }()
-
+    
+    lazy var logIn = false
+    
     @objc private func logInButtonAction() {
         let profileVC = ProfileViewController()
+            if logIn == true {
         self.navigationController?.pushViewController(profileVC, animated: false)
+        } else { UIView.animate(
+            withDuration: 1.0,
+                delay: 0,
+                usingSpringWithDamping: 0.1,
+                initialSpringVelocity: 0.1,
+                options: .curveEaseInOut) {
+                    self.stackView.layer.borderColor = UIColor.systemRed.cgColor
+                }
+        }
     }
     
     // MARK: UIScrollView keyboard
@@ -146,7 +176,7 @@ class LogInViewController: UIViewController {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
 
-        [logoImage, stackView, logInButton].forEach { contentView.addSubview($0) }
+        [logoImage, stackView, logInButton, messageLabel].forEach { contentView.addSubview($0) }
         [userLoginTextField, userPasswordTextField].forEach { stackView.addArrangedSubview($0) }
 
         NSLayoutConstraint.activate([
@@ -163,6 +193,10 @@ class LogInViewController: UIViewController {
             stackView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             stackView.heightAnchor.constraint(equalToConstant: 100),
             
+            // MessageLabel
+            messageLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 2),
+            messageLabel.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
+            
             // LogInText
             userLoginTextField.heightAnchor.constraint(equalToConstant: 50),
             // PasswordText
@@ -174,8 +208,30 @@ class LogInViewController: UIViewController {
             logInButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
                  /// Обязательно закрепить нижний элемент к низу contentView !!!
-            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            logInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
+    }
+    
+    private func incorrectFill(){
+        stackView.layer.borderWidth = 1
+        stackView.layer.borderColor = UIColor.systemRed.cgColor
+        messageLabel.textColor = .systemRed
+    }
+    private func checkValidation(passwordCheck: String) {
+        if userPasswordTextField.isEditing {
+            guard passwordCheck.count >= minLenght else { // если меньше 8 символов то
+                messageLabel.textColor = .systemRed
+                messageLabel.text = "Password must be longer than \(minLenght - passwordCheck.count) characters"
+            return
+            }
+            if passwordCheck.isValidPassword(passwordRegEx) { // совпадает
+                messageLabel.textColor = .systemGreen
+                messageLabel.text = ""
+            } else {
+                messageLabel.textColor = .systemRed // не совпадает
+                messageLabel.text = ""
+            }
+        }
     }
 
 }
@@ -184,6 +240,46 @@ class LogInViewController: UIViewController {
 extension LogInViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
+        if  userLoginTextField.text == "" {
+            incorrectFill()
+            messageLabel.text = "Email/phone can't be empty"
+        } else if userPasswordTextField.text == "" {
+            incorrectFill()
+            messageLabel.text = "Password can't be empty"
+        } else if userPasswordTextField.text == password && userLoginTextField.text == email {
+            stackView.layer.borderColor = UIColor.systemGreen.cgColor
+            messageLabel.textColor = .systemGreen
+            logIn = true
+                
+        } else if userPasswordTextField.text != password || userLoginTextField.text != email {
+            incorrectFill()
+            
+            let alert = UIAlertController(title: "Error", message: "Incorrect email, phone or password", preferredStyle: .alert)
+            let tryAction = UIAlertAction(title: "Try again", style: .default) { _ in
+                self.dismiss(animated: true)
+            }
+            alert.addAction(tryAction)
+            present(alert, animated: true)
+            
+        }
+        
+        userPasswordTextField.resignFirstResponder()
+        userLoginTextField.resignFirstResponder()
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let text = (textField.text ?? "") + string
+        let res: String
+
+        if range.length == 1 {
+            let end = text.index(text.startIndex, offsetBy: text.count - 1)
+            res = String(text[text.startIndex..<end])
+        } else {
+            res = text
+        }
+        checkValidation(passwordCheck: res)
+        textField.text = res
+        return false
     }
 }

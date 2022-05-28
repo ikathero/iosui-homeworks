@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private let post: [Post] = Post.makePost()
+    private var posts: [Post] = Post.makePost()
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -77,26 +77,47 @@ class ProfileViewController: UIViewController {
      }
 
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return section == 0 ? 1 : post.count
+         return section == 0 ? 1 : posts.count
      }
 
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          if indexPath.section == 0 {
              let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
+             cell.delegate = self // открытие через делегат по стрелке
              return cell
          } else {
              let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-                      cell.setupCell(post[indexPath.row])
+             let post = posts[indexPath.row]
+             cell.post = post
+             cell.onLikeTap = { post in
+                 self.posts[indexPath.row] = post
+                 cell.post = post
+             }
+             
+             let fullPVC = FullPostViewController()
+             cell.onImageViewTap = { post in
+                 self.posts[indexPath.row] = post
+                 cell.post = post
+                 self.navigationController?.present(fullPVC, animated: true)
+                 fullPVC.postImageView.image = UIImage(named: post.image)
+                 fullPVC.descriptionLabel.text = post.description
+                 fullPVC.likesLabel.text = "Likes: \(String(post.likes))"
+                 fullPVC.viewsLabel.text = "Views: \(String(post.views))"
+             }
+             
+                cell.setupCell(posts[indexPath.row])
+             
              return cell
          }
      }
      
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         if indexPath.section == 0 {
-             self.navigationController?.pushViewController(PhotosViewController(), animated: true)
-             self.navigationItem.backButtonTitle = "Back"
-         } else { return
-         }
+         // Открытие по тапу на ячейку
+//         if indexPath.section == 0 {
+//             self.navigationController?.pushViewController(PhotosViewController(), animated: true)
+//             self.navigationItem.backButtonTitle = "Back"
+//         } else { return
+//         }
      }
  }
 
@@ -105,5 +126,17 @@ class ProfileViewController: UIViewController {
 extension UIView {
     static var identifier: String {
         return String(describing: self)
+    }
+}
+
+// MARK: - PhotosViewDelegate
+
+protocol PhotosTableViewDelegate: AnyObject {
+    func rightArrowImagePressed()
+}
+
+extension ProfileViewController: PhotosTableViewDelegate {
+    func rightArrowImagePressed() {
+        self.navigationController?.pushViewController(PhotosViewController(), animated: true)
     }
 }

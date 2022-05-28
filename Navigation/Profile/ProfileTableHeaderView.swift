@@ -93,7 +93,7 @@ class ProfileHeaderView: UIView {
         }
     }
     
-    lazy var fullNameLabel: UILabel = {
+    private lazy var fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
         fullNameLabel.text = "Venediktova Kate"
@@ -102,7 +102,7 @@ class ProfileHeaderView: UIView {
         return fullNameLabel
     }()
 
-    lazy var statusLabel: UILabel = {
+    private lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         statusLabel.text = "Waiting for something..."
@@ -112,7 +112,7 @@ class ProfileHeaderView: UIView {
         return statusLabel
     }()
 
-    lazy var setStatusButton: UIButton = {
+    private lazy var setStatusButton: UIButton = {
         let setStatusButton = UIButton()
         let colorButton = UIColor(patternImage: UIImage(named: "blue_pixel.png")!)
         setStatusButton.translatesAutoresizingMaskIntoConstraints = false
@@ -129,12 +129,27 @@ class ProfileHeaderView: UIView {
     }()
 
     @objc private func buttonPressed() {
-        statusLabel.text = statusText
+        if statusTextField.text != "" {
+            statusLabel.text = statusText
+            self.statusTextField.layer.borderColor = UIColor.black.cgColor
+            statusTextField.text = ""
+            statusTextField.placeholder = "Enter text here ..."
+        } else {
+            UIView.animate(
+            withDuration: 2.5,
+            delay: 0,
+            usingSpringWithDamping: 0.1,
+            initialSpringVelocity: 0.1,
+            options: .curveEaseInOut) {
+            self.statusTextField.placeholder = "Can't be empty"
+            self.statusTextField.layer.borderColor = UIColor.systemRed.cgColor
+            }
+        }
         self.endEditing(true)
         print(statusText)
     }
     
-    lazy var statusTextField: UITextField = {
+    private lazy var statusTextField: UITextField = {
         let statusTextField = UITextField()
         statusTextField.translatesAutoresizingMaskIntoConstraints = false
         statusTextField.indent(size: 10)
@@ -194,7 +209,7 @@ class ProfileHeaderView: UIView {
             
             // CloseImage
             closeImageButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            closeImageButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8)
+            closeImageButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16)
         ])
     }
 
@@ -207,4 +222,13 @@ extension UITextField {
          self.leftView = UIView(frame: CGRect(x: self.frame.minX, y: self.frame.minY, width: size, height: self.frame.height))
          self.leftViewMode = .always
      }
+}
+
+// MARK: UITextFieldDelegate
+
+extension ProfileHeaderView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.endEditing(true)
+        return true
+    }
 }
