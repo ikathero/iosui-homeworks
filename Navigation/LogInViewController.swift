@@ -78,16 +78,16 @@ class LogInViewController: UIViewController {
     private let minLenght = 8
     private lazy var passwordRegEx = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[$@$!%*?&#])[A-Za-z\\d$@$!%*?&#]{\(minLenght),14}$"
     
-    private lazy var emailRegEx = "(?:[a-zA-Z0-9!#$%\\&‘*+/=?\\^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%\\&'*+/=?\\^_`{|}"
-            + "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
-            + "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
-            + "z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
-            + "]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
-            + "9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
-            + "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
+//    private lazy var emailRegEx = "(?:[a-zA-Z0-9!#$%\\&‘*+/=?\\^_`{|}~-]+(?:\\.[a-zA-Z0-9!#$%\\&'*+/=?\\^_`{|}"
+//            + "~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
+//            + "x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-"
+//            + "z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5"
+//            + "]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-"
+//            + "9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21"
+//            + "-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"
     
-    private let password = "Diploma22!"
-    private let email = "ikathero@gmail.com"
+    private let password = "Diploma22!" // пароль для входа
+    private let email = "ikathero@gmail.com" // почта для входа
     
     private lazy var userPasswordTextField: UITextField = {
         let userPasswordTextField = UITextField()
@@ -130,17 +130,17 @@ class LogInViewController: UIViewController {
     
     @objc private func logInButtonAction() {
         let profileVC = ProfileViewController()
-//        if logIn == true {
+            if logIn == true {
         self.navigationController?.pushViewController(profileVC, animated: false)
-//        } else { UIView.animate(
-//            withDuration: 1.0,
-//                delay: 0,
-//                usingSpringWithDamping: 0.1,
-//                initialSpringVelocity: 0.1,
-//                options: .curveEaseInOut) {
-//                    self.stackView.layer.borderColor = UIColor.systemRed.cgColor
-//                }
-//        }
+        } else { UIView.animate(
+            withDuration: 1.0,
+                delay: 0,
+                usingSpringWithDamping: 0.1,
+                initialSpringVelocity: 0.1,
+                options: .curveEaseInOut) {
+                    self.stackView.layer.borderColor = UIColor.systemRed.cgColor
+                }
+        }
     }
     
     // MARK: UIScrollView keyboard
@@ -297,5 +297,4 @@ extension LogInViewController: UITextFieldDelegate {
         textField.text = res
         return false
     }
-    
 }

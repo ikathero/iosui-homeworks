@@ -9,6 +9,8 @@ import UIKit
 
 class PhotosTableViewCell: UITableViewCell {
     
+    weak var delegate: PhotosTableViewDelegate?
+    
     private let photosView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -33,8 +35,18 @@ class PhotosTableViewCell: UITableViewCell {
         view.sizeToFit()
         view.clipsToBounds = true
         view.image = UIImage(systemName: "arrow.right")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        view.isUserInteractionEnabled = true
         return view
     }()
+    
+    private func setupGestures() {
+        let tapRightArrowGesture = UITapGestureRecognizer(target: self, action: #selector(rightArrowImageAction))
+        rightArrowImageView.addGestureRecognizer(tapRightArrowGesture)
+    }
+    
+    @objc func rightArrowImageAction() {
+        delegate?.rightArrowImagePressed()
+    }
     
     private var stackView: UIStackView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -100,6 +112,7 @@ class PhotosTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()
+        setupGestures()
     }
 
     required init?(coder: NSCoder) {

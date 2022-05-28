@@ -84,6 +84,7 @@ class ProfileViewController: UIViewController {
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          if indexPath.section == 0 {
              let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
+             cell.delegate = self // открытие через делегат по стрелке
              return cell
          } else {
              let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
@@ -93,6 +94,7 @@ class ProfileViewController: UIViewController {
                  self.posts[indexPath.row] = post
                  cell.post = post
              }
+             
              let fullPVC = FullPostViewController()
              cell.onImageViewTap = { post in
                  self.posts[indexPath.row] = post
@@ -111,13 +113,13 @@ class ProfileViewController: UIViewController {
      }
      
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-         if indexPath.section == 0 {
-             self.navigationController?.pushViewController(PhotosViewController(), animated: true)
-             self.navigationItem.backButtonTitle = "Back"
-         } else { return
-         }
+         // Открытие по тапу на ячейку
+//         if indexPath.section == 0 {
+//             self.navigationController?.pushViewController(PhotosViewController(), animated: true)
+//             self.navigationItem.backButtonTitle = "Back"
+//         } else { return
+//         }
      }
-
  }
 
 // MARK: - UIView
@@ -125,5 +127,17 @@ class ProfileViewController: UIViewController {
 extension UIView {
     static var identifier: String {
         return String(describing: self)
+    }
+}
+
+// MARK: - PhotosViewDelegate
+
+protocol PhotosTableViewDelegate: AnyObject {
+    func rightArrowImagePressed()
+}
+
+extension ProfileViewController: PhotosTableViewDelegate {
+    func rightArrowImagePressed() {
+        self.navigationController?.pushViewController(PhotosViewController(), animated: true)
     }
 }
