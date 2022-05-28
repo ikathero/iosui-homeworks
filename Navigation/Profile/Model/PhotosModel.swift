@@ -26,6 +26,7 @@ struct Photos {
         photo.append(Photos(author: "Venediktova Kate", image: "8"))
         photo.append(Photos(author: "Venediktova Kate", image: "9"))
         photo.append(Photos(author: "Venediktova Kate", image: "10"))
+        photo.append(Photos(author: "Venediktova Kate", image: "11"))
         photo.append(Photos(author: "Venediktova Kate", image: "12"))
         photo.append(Photos(author: "Venediktova Kate", image: "13"))
         photo.append(Photos(author: "Venediktova Kate", image: "14"))
